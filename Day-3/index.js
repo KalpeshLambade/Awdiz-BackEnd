@@ -14,6 +14,11 @@ app.get('/', (req, res) => {
     res.send("Working..")
 })
 
+
+app.get("/ping", (req,res) =>{
+    return res.send("pong");
+})
+
 app.post("/register", async (req, res) => {
     try {
         const { name, email, password, number } = req.body;
@@ -49,7 +54,7 @@ app.put("/update-data/:id", async (req, res) => {
         // console.log(res, "- res")
         res.send("Data Updated!");
     } catch (error) {
-        return res.send(error)
+        return res.send(error);
     }
 })
 
@@ -69,9 +74,9 @@ app.delete("/delete-user/:id", async (req, res) => {
 mongoose.connect(process.env.MONGODB_URL).then(() => {
     console.log("Connected to DB")
 }).catch((error) => {
-    console.log("Error while connecting mongofb :- ", error)
+    console.log("Error while connecting mongoDB :- ", error)
 })
 
-app.listen(8000, () => {
-    console.log("Sever listening on port 8000");
+app.listen(process.env.PORT, () => {
+    console.log(`server running on ${process.env.PORT}`);
 })
